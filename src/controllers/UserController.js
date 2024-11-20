@@ -15,13 +15,31 @@ router.get('/', async (req, res) => {
 });
 
 // Rota para criar um usuário
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
+  console.log("Dados recebidos na rota:", req.body); // Log dos dados recebidos
+  const { nome, email, senha, tipo } = req.body;
+
+  // Validação dos dados recebidos
+  if (!nome || !email || !senha || !tipo) {
+    console.error("Dados inválidos:", { nome, email, senha, tipo });
+    return res.status(400).json({ error: "Todos os campos são obrigatórios." });
+  }
+
+  // Verifica se o campo "type" é válido
+  if (!["admin", "jogador"].includes(tipo)) {
+    return res.status(400).json({ error: "Tipo de usuário inválido. Deve ser 'admin' ou 'jogador'." });
+  }
+
   try {
-    const newUser = await userService.registerUser(req.body);
-    res.status(201).json(newUser);
+    // Envia os dados para o serviço
+    const newUser = await userService.registerUser({ nome, email, senha, tipo });
+    res.status(201).json({ message: "Usuário criado com sucesso!", newUser });
   } catch (err) {
+    console.error("Erro na criação do usuário:", err.message);
+    // Lida com possíveis erros do serviço
     res.status(500).json({ error: err.message });
   }
 });
+
 
 module.exports = router;

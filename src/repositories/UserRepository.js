@@ -12,9 +12,17 @@ class UserRepository {
     return data;
   }
 
+  /**
+   * Cria um novo usuário no banco de dados.
+   * @param {Object} user - Dados do usuário a ser criado.
+   */
+
   async createUser(user) {
     const { data, error } = await supabase.from('user').insert([user]);
-    if (error) throw new Error(error.message);
+    if (error) {
+      console.error("Erro ao inserir usuário:", error.message);
+      throw new Error(error.message);
+    }
     return data;
   }
 }

@@ -1,0 +1,18 @@
+# Dependências instaladas
+node_modules/
+
+# Arquivos de logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de ambiente
+.env
+
+# Build ou arquivos gerados
+dist/
+build/
+
+# Sistema operacional (opcional)
+.DS_Store
+Thumbs.db
