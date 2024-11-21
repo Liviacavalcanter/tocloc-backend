@@ -13,19 +13,23 @@ const supabase = createClient(
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:3000' })); // Permitir acesso ao front-end
+app.use(cors({
+  origin: true
+})); // Permitir acesso ao front-end
 
 // Importa os controllers
 const userController = require('./src/controllers/UserController');
 const sportsPlaceController = require('./src/controllers/SportsPlaceController');
 const availabilityController = require('./src/controllers/AvailabilityController');
 const reservationController = require('./src/controllers/ReservationController');
+const authController = require('./src/controllers/AuthController'); 
 
 // Conecta as rotas ao app
 app.use('/api/users', userController);
 app.use('/api/sports-places', sportsPlaceController);
 app.use('/api/availabilities', availabilityController);
 app.use('/api/reservations', reservationController);
+app.use('/api/auth', authController); // Agora, AuthController é um roteador
 
 // Inicia o servidor na porta 3001
 const PORT = 3001;
