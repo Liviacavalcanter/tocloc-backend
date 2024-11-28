@@ -1,13 +1,16 @@
 const SportsPlaceRepository = require('../repositories/SportsPlaceRepository');
 
+
 class SportsPlaceService {
   constructor() {
-    this.sportsPlaceRepository = new SportsPlaceRepository();
+   this.SportsPlaceRepository = new SportsPlaceRepository();
   }
 
-  async listSportsPlaces() {
-    return await this.sportsPlaceRepository.getAllSportsPlace();
+  // Método para listar esportes
+  async listarEsportes() {
+    return await this.SportsPlaceRepository.getAllSportsPlace();
   }
+
 
   async registerSportsPlace(sportsPlace) {
     return await this.sportsPlaceRepository.createSportsPlace(sportsPlace);

@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
   // Validação dos dados recebidos
   if (!nome || !email || !senha || !tipo) {
     console.error("Dados inválidos:", { nome, email, senha, tipo });
-    return res.status(400).json({ error: "Todos os campos são obrigatórios." });
+    return res.status(400).json({ error: "Todos os campos são obrigatórios." });  
   }
 
   // Verifica se o campo "tipo" é válido
