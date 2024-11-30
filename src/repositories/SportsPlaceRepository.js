@@ -36,6 +36,15 @@ class SportsPlaceRepository {
     if (error) throw new Error(error.message);
     return data;
   }
+
+  async getReservationsBySportsPlaceId(sportsPlaceId) {
+    const { data, error } = await supabase
+      .from('reservation') 
+      .select('*')
+      .eq('id_local_esportivo', sportsPlaceId); // Filtra pela ID do local esportivo
+    if (error) throw new Error(error.message);
+    return data; 
+  }
 }
 
 module.exports = SportsPlaceRepository;

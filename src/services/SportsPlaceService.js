@@ -23,6 +23,10 @@ class SportsPlaceService {
   async deleteSportsPlace(id) {
       return await this.sportsPlaceRepository.deleteSportsPlace(id);
     }
+
+    async getReservationsBySportsPlaceId(id) {
+      return await this.sportsPlaceRepository.getReservationsBySportsPlaceId(id);
+    }
 }
 
 module.exports = SportsPlaceService;

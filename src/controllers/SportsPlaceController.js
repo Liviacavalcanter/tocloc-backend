@@ -47,4 +47,13 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.get('/:id/reservations', async (req, res) => {
+  try {
+    const reservations = await sportsPlaceService.getReservationsBySportsPlaceId(req.params.id);
+    res.status(200).json(reservations);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao buscar reservas: ' + err.message });
+  }
+});
+
 module.exports = router;
