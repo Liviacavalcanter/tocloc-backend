@@ -21,6 +21,10 @@ class ReservationService {
 async deleteReservation(id) {
     return await this.reservationRepository.deleteReservation(id);
   }
+
+  async getAllReservationsWithDetails() {
+    return await this.reservationRepository.getAllReservationsWithDetails();
+  }
 }
 
 module.exports = ReservationService;

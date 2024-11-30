@@ -14,6 +14,16 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Rota para listar reservas com detalhes
+router.get('/details', async (req, res) => {
+  try {
+    const reservationsWithDetails = await reservationService.getAllReservationsWithDetails();
+    res.status(200).json(reservationsWithDetails);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao buscar reservas com detalhes: ' + err.message });
+  }
+});
+
 // Rota para criar uma nova reserva
 router.post('/', async (req, res) => {
   try {
@@ -44,5 +54,7 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ error: 'Erro ao deletar local esportivo: ' + err.message });
   }
 });
+
+
 
 module.exports = router;

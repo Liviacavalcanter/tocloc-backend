@@ -42,6 +42,35 @@ class ReservationRepository {
     if (error) throw new Error(error.message);
     return data;
   }
+
+  async getAllReservationsWithDetails() {
+    const { data, error } = await supabase
+      .from('reservation')
+      .select(`
+        id,
+        data_reserva,
+        status,
+        id_local_esportivo (
+          id,
+          nome,
+          localizacao
+        ),
+        id_disponibilidade (
+          id,
+          data,
+          hora_inicio,
+          hora_fim
+        )
+      `);
+  
+    if (error) {
+      console.error('Erro ao buscar reservas com detalhes:', error.message);
+      throw new Error(error.message);
+    }
+  
+    return data;
+  }
+  
 }
 
 module.exports = ReservationRepository;
