@@ -30,6 +30,28 @@ class UserService {
     // Envia os dados validados
     return await this.userRepository.createUser({ nome, email, senha: md5(senha), tipo });
   }
+
+  async updateUser(id, updates) {
+    if (!id) {
+      throw new Error("O ID do usuário é obrigatório.");
+    }
+  
+    if (updates.senha) {
+      // Criptografar a senha antes de atualizar
+      updates.senha = md5(updates.senha);
+    }
+  
+    return await this.userRepository.updateUser(id, updates);
+  }
+
+  async deleteUser(id) {
+    if (!id) {
+      throw new Error("O ID do usuário é obrigatório.");
+    }
+  
+    return await this.userRepository.deleteUser(id);
+  }
+  
   
 }
 

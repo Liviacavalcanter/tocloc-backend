@@ -3,18 +3,26 @@ const SportsPlaceRepository = require('../repositories/SportsPlaceRepository');
 
 class SportsPlaceService {
   constructor() {
-   this.SportsPlaceRepository = new SportsPlaceRepository();
+   this.sportsPlaceRepository = new SportsPlaceRepository();
   }
 
-  // Método para listar esportes
   async listarEsportes() {
-    return await this.SportsPlaceRepository.getAllSportsPlace();
+    return await this.sportsPlaceRepository.getAllSportsPlace();
   }
 
 
   async registerSportsPlace(sportsPlace) {
     return await this.sportsPlaceRepository.createSportsPlace(sportsPlace);
   }
+
+  async updateSportsPlace(id, updatedData) {
+      return await this.sportsPlaceRepository.updateSportsPlace(id, updatedData);
+    }
+  
+   
+  async deleteSportsPlace(id) {
+      return await this.sportsPlaceRepository.deleteSportsPlace(id);
+    }
 }
 
 module.exports = SportsPlaceService;

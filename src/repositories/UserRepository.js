@@ -46,6 +46,37 @@ class UserRepository {
 
     return data;
   }
+
+  async updateUser(id, updates) {
+    const { data, error } = await supabase
+      .from('user')
+      .update(updates)
+      .match({ id }) // Filtra pela ID do local esportivo
+      .single(); // Retorna um único resultado
+  
+    if (error) {
+      console.error('Erro ao atualizar usuário:', error.message);
+      throw new Error(error.message);
+    }
+  
+    return data;
+  }
+
+  async deleteUser(id) {
+    const { data, error } = await supabase
+      .from('user')
+      .delete()
+      .match({ id }); 
+  
+    if (error) {
+      console.error('Erro ao deletar usuário:', error.message);
+      throw new Error(error.message);
+    }
+  
+    return data;
+  }
+  
+  
 }
 
 module.exports = UserRepository;

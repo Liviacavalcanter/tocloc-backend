@@ -12,8 +12,27 @@ class SportsPlaceRepository {
     return data;
   }
 
-  async createSportsPlace(sports_place) {
-    const { data, error } = await supabase.from('sports_place').insert([sports_place]);
+  async createSportsPlace(sportsPlace) {
+    const { data, error } = await supabase.from('sports_place').insert([sportsPlace]);
+    if (error) throw new Error(error.message);
+    return data;
+  }
+  
+  async updateSportsPlace(id, updatedData) {
+    const { data, error } = await supabase
+      .from('sports_place')
+      .update(updatedData) // Atualiza os campos
+      .match({ id }) // Filtra pela ID do local esportivo
+      .single(); // Retorna um único resultado
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
+  async deleteSportsPlace(id) {
+    const { data, error } = await supabase
+      .from('sports_place')
+      .delete()
+      .match({ id }); 
     if (error) throw new Error(error.message);
     return data;
   }

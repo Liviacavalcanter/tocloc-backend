@@ -41,4 +41,23 @@ router.post("/", async (req, res) => {
   }
 });
 
+
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedUser = await userService.updateUser(req.params.id, req.body);
+    res.status(200).json(updatedUser);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao atualizar usuario: ' + err.message });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    await userService.deleteUser(req.params.id);
+    res.status(204).send(); // Não retorna corpo, apenas o status 204 de sucesso
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao deletar local esportivo: ' + err.message });
+  }
+});
+
 module.exports = router;

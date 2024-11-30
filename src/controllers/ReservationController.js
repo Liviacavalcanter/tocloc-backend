@@ -24,4 +24,25 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Rota para atualizar uma reserva
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedReservation = await reservationService.updateReservation(req.params.id, req.body);
+    res.status(200).json(updatedReservation);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao atualizar reserva: ' + err.message });
+  }
+});
+
+
+// Rota para deletar uma reserva
+router.delete('/:id', async (req, res) => {
+  try {
+    await reservationService.deleteReservation(req.params.id);
+    res.status(204).send(); // Não retorna corpo, apenas o status 204 de sucesso
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao deletar local esportivo: ' + err.message });
+  }
+});
+
 module.exports = router;
