@@ -12,27 +12,38 @@ class ReservationRepository {
     return data;
   }
 
+  async updateAvailabilityStatus(idDisponibilidade) {
+    const { data, error } = await supabase
+      .from('availability') 
+      .update({ status: 'reservado' }) 
+      .match({ id: idDisponibilidade }); 
+
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
   async createReservation(reservation) {
     const { data, error } = await supabase.from('reservation').insert([reservation]);
     if (error) throw new Error(error.message);
+    await this.updateAvailabilityStatus(reservation.id_disponibilidade);
+
     return data;
   }
   
   async updateReservation(id, updatedData) {
     const { data, error } = await supabase
       .from('reservation')
-      .update(updatedData) // Atualiza os campos
-      .match({ id }) // Filtra pela ID da reserva
-      .single(); // Retorna um único resultado
+      .update(updatedData) 
+      .match({ id }) 
+      .single(); 
   
     if (error) {
       console.error("Erro ao atualizar reserva:", error.message);
-      throw new Error(error.message); // Lançar erro se houver
+      throw new Error(error.message); 
     }
   
     return data;
   }
-  
 
   async deleteReservation(id) {
     const { data, error } = await supabase
@@ -42,7 +53,7 @@ class ReservationRepository {
     if (error) throw new Error(error.message);
     return data;
   }
-
+  
   async getAllReservationsWithDetails() {
     const { data, error } = await supabase
       .from('reservation')
@@ -70,7 +81,6 @@ class ReservationRepository {
   
     return data;
   }
-  
 }
 
 module.exports = ReservationRepository;

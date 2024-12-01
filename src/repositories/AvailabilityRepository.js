@@ -7,7 +7,11 @@ const supabase = createClient(
 
 class AvailabilityRepository {
   async getAllAvailabilities() {
-    const { data, error } = await supabase.from('availability').select('*');
+    const { data, error } = await supabase
+      .from('availability')
+      .select('*')
+      .eq('status', 'disponivel'); 
+
     if (error) throw new Error(error.message);
     return data;
   }

@@ -21,6 +21,10 @@ class AvailabilityService {
 async deleteAvalability(id) {
     return await this.availabilityRepository.deleteAvalability(id);
   }
+
+  async getReservationsBySportsPlaceId(id) {
+    return await this.sportsPlaceRepository.getReservationsBySportsPlaceId(id);
+  }
 }
 
 module.exports = AvailabilityService;
