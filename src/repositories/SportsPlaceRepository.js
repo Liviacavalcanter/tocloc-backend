@@ -50,7 +50,7 @@ class SportsPlaceRepository {
 async getAvailabilityBySportsPlaceId(sportsPlaceId) {
   const { data, error } = await supabase
   .from('availability')
-  .select('data, hora_inicio, hora_fim, status')
+  .select('*')
   .eq('id_local_esportivo', sportsPlaceId);
   if (error) throw new Error(error.message);
   return data; 

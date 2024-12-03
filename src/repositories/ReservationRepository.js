@@ -12,20 +12,9 @@ class ReservationRepository {
     return data;
   }
 
-  async updateAvailabilityStatus(idDisponibilidade) {
-    const { data, error } = await supabase
-      .from('availability') 
-      .update({ status: 'reservado' }) 
-      .match({ id: idDisponibilidade }); 
-
-    if (error) throw new Error(error.message);
-    return data;
-  }
-
   async createReservation(reservation) {
     const { data, error } = await supabase.from('reservation').insert([reservation]);
     if (error) throw new Error(error.message);
-    await this.updateAvailabilityStatus(reservation.id_disponibilidade);
 
     return data;
   }
