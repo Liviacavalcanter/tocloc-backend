@@ -3,15 +3,17 @@ const SportsPlaceService = require('../services/SportsPlaceService');
 const router = express.Router();
 const sportsPlaceService = new SportsPlaceService();
 
-// Rota para criar um novo local esportivo
 router.post('/', async (req, res) => {
   try {
     const newPlace = await sportsPlaceService.registerSportsPlace(req.body);
-    res.status(201).json(newPlace);
+    res.status(201).json({
+      place: newPlace,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 
 
@@ -51,6 +53,15 @@ router.get('/:id/reservations', async (req, res) => {
   try {
     const reservations = await sportsPlaceService.getReservationsBySportsPlaceId(req.params.id);
     res.status(200).json(reservations);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao buscar reservas: ' + err.message });
+  }
+});
+
+router.get('/:id/availabilities', async (req, res) => {
+  try {
+    const availabilities = await sportsPlaceService.getAvailabilityBySportsPlaceId(req.params.id);
+    res.status(200).json(availabilities);
   } catch (err) {
     res.status(500).json({ error: 'Erro ao buscar reservas: ' + err.message });
   }

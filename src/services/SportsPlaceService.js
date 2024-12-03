@@ -27,6 +27,10 @@ class SportsPlaceService {
     async getReservationsBySportsPlaceId(id) {
       return await this.sportsPlaceRepository.getReservationsBySportsPlaceId(id);
     }
+
+    async getAvailabilityBySportsPlaceId(id) {
+      return await this.sportsPlaceRepository.getAvailabilityBySportsPlaceId(id);
+    }
 }
 
 module.exports = SportsPlaceService;
