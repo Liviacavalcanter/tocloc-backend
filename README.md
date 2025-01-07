@@ -1,4 +1,6 @@
 # Nome do Projeto - Tocloc
+Trabalho acadêmico em equipe, você pode acessar o front-end nesse repositório: https://github.com/laissilva04/Front-End-TocLoc
+
 Sistema de gerenciamento de locais esportivos.
 
 1. npm install - para instalar dependências
