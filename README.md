@@ -29,3 +29,8 @@ Admin (Proprietário do local)
     SUPABASE_KEY=<sua-chave-supabase>
     JWT_SECRET=<chave-jwt>
 3. Execute o servidor - npm start
+
+## Contribuidores
+@Laissilva04 @Liviacavalcanter
+
+Link para o repositório do front-end 👉: https://github.com/liviacavalcanter/tocloc-frontend
